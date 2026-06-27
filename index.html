@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>表情お題メーカー</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app">
+    <main class="main">
+      <h1 class="title">表情お題メーカー</h1>
+
+      <section class="prompt-section" aria-live="polite">
+        <p class="prompt-label">お題</p>
+        <p class="prompt-text is-placeholder" id="promptText">ボタンを押してお題を生成</p>
+      </section>
+
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="generateBtn">
+          生成
+        </button>
+        <button type="button" class="btn btn-secondary" id="copyBtn" disabled>
+          コピー
+        </button>
+      </div>
+    </main>
+
+    <section class="history-section" id="historySection">
+      <h2 class="history-title">履歴</h2>
+      <div class="history-panel">
+        <ul class="history-list" id="historyList"></ul>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/app.js?v=3"></script>
+</body>
+</html>
