@@ -99,6 +99,24 @@ function pickRandom(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
 
+/** Count how many distinct prompts can be generated from enabled categories. */
+function countPossiblePrompts() {
+  let total = 1;
+  let hasEnabled = false;
+
+  for (const category of Object.values(CATEGORIES)) {
+    if (!category.enabled) continue;
+
+    const items = categoryData[category.id];
+    if (!items || items.length === 0) continue;
+
+    hasEnabled = true;
+    total *= items.length;
+  }
+
+  return hasEnabled ? total : 0;
+}
+
 /**
  * Build a combined prompt from enabled categories.
  *
@@ -129,18 +147,29 @@ function combinePrompt(selections) {
 
 /** Generate a new random prompt from loaded category data. */
 function generatePrompt() {
-  const selections = {};
+  const maxAttempts = 100;
+  let prompt = "";
 
-  for (const category of Object.values(CATEGORIES)) {
-    if (!category.enabled) continue;
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const selections = {};
 
-    const items = categoryData[category.id];
-    if (!items || items.length === 0) continue;
+    for (const category of Object.values(CATEGORIES)) {
+      if (!category.enabled) continue;
 
-    selections[category.id] = pickRandom(items);
+      const items = categoryData[category.id];
+      if (!items || items.length === 0) continue;
+
+      selections[category.id] = pickRandom(items);
+    }
+
+    prompt = combinePrompt(selections);
+
+    if (!prompt || prompt !== currentPrompt || countPossiblePrompts() <= 1) {
+      return prompt;
+    }
   }
 
-  return combinePrompt(selections);
+  return prompt;
 }
 
 // ========================================
