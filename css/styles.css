@@ -58,7 +58,7 @@ body {
 
 .title {
   text-align: center;
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(1.5rem, 4vw, 2rem); /* ページタイトル「表情お題メーカー」のサイズ　左が最小、右が最大、真ん中は画面幅に合わせて変わるサイズ */
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -76,7 +76,7 @@ body {
 }
 
 .prompt-label {
-  font-size: 0.85rem;
+  font-size: 0.90rem; /* 「お題」ラベルのサイズ（固定） */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -85,16 +85,16 @@ body {
 }
 
 .prompt-text {
-  font-size: clamp(1.75rem, 5vw, 2.75rem);    /* お題のフォントのサイズ調整　左が最小、右が最大、真ん中は画面幅に合わせて変わるサイズ */
+  font-size: clamp(1.75rem, 5vw, 2.30rem); /* 生成されたお題のサイズ　左が最小、右が最大、真ん中は画面幅に合わせて変わるサイズ */
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: -0.02em;
-  /* Reserve space for generated text so font-size changes don't reflow layout */
+  /* お題エリアの最低の高さ（font-size を変更したら、上の clamp 値に合わせて調整） */
   min-height: calc(1.6 * 1.3 * clamp(1.75rem, 6vw, 2.75rem));
 }
 
 .prompt-text.is-placeholder {
-  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-size: clamp(1rem, 3vw, 1.25rem); /* 生成前のプレースホルダー文のサイズ　左が最小、右が最大、真ん中は画面幅に合わせて変わるサイズ */
   font-weight: 500;
   color: var(--text-muted);
 }
@@ -126,7 +126,7 @@ body {
   border: none;
   border-radius: 999px;
   padding: 1rem 2rem;
-  font-size: 1rem;
+  font-size: 1rem; /* ボタン共通のサイズ（固定） */
   font-weight: 600;
   cursor: pointer;
   transition: background var(--transition), transform 0.15s ease, opacity var(--transition);
@@ -145,7 +145,7 @@ body {
   background: var(--accent);
   color: #fff;
   min-width: min(100%, 280px);
-  font-size: 1.1rem;
+  font-size: 1.1rem; /* 「生成」ボタンのサイズ（固定） */
   padding: 1.1rem 2.25rem;
 }
 
@@ -168,7 +168,7 @@ body {
    History
    ======================================== */
 .history-title {
-  font-size: 0.95rem;
+  font-size: 0.95rem; /* 「履歴」見出しのサイズ（固定） */
   font-weight: 600;
   color: var(--text-muted);
   margin-bottom: 0.75rem;
@@ -197,7 +197,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 0.75rem 1rem;
-  font-size: 0.95rem;
+  font-size: 0.95rem; /* 履歴リスト各項目のサイズ（固定） */
   color: var(--text);
 }
 
