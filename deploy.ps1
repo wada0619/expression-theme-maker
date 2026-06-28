@@ -1,4 +1,4 @@
-# GitHub へアップロードして GitHub Pages を有効化するスクリプト
+# GitHub upload and GitHub Pages setup
 $ErrorActionPreference = "Stop"
 
 $env:Path = "C:\Program Files\Git\cmd;" + $env:Path
@@ -10,7 +10,7 @@ $pagesUrl = "https://wada0619.github.io/expression-theme-maker/"
 Set-Location $PSScriptRoot
 
 if (-not (Test-Path $git)) {
-  Write-Host "Git が見つかりません。https://git-scm.com/download/win からインストールしてください。"
+  Write-Host "Git not found. Install from https://git-scm.com/download/win"
   exit 1
 }
 
@@ -31,24 +31,36 @@ if ($remotes -notcontains "origin") {
   & $git remote add origin $repoUrl
 }
 
-Write-Host "GitHub へ push します。ブラウザで GitHub ログインを求められたら承認してください。"
+Write-Host "Pushing to GitHub. Approve login in the browser if prompted."
 & $git push -u origin main
 
 if (Test-Path $gh) {
-  Write-Host "GitHub Pages を有効化しています..."
+  Write-Host "Enabling GitHub Pages..."
   & $gh auth status 2>$null
   if ($LASTEXITCODE -ne 0) {
     & $gh auth login -w -p https -h github.com
   }
-  & $gh api repos/wada0619/expression-theme-maker/pages -X POST -f build_type=legacy -f source[branch]=main -f source[path]=/ 2>$null
+
+  $pagesArgs = @(
+    "api", "repos/wada0619/expression-theme-maker/pages",
+    "-X", "POST",
+    "-f", "build_type=legacy",
+    "-f", "source[branch]=main",
+    "-f", "source[path]=/"
+  )
+  & $gh @pagesArgs 2>$null
+
   if ($LASTEXITCODE -ne 0) {
-    & $gh api repos/wada0619/expression-theme-maker/pages -X PUT -f build_type=legacy -f source[branch]=main -f source[path]=/
+    $pagesArgs[3] = "PUT"
+    & $gh @pagesArgs
   }
-  Write-Host "公開 URL: $pagesUrl"
-} else {
-  Write-Host "GitHub CLI (gh) が未インストールのため、Pages は手動設定が必要です。"
-  Write-Host "Settings → Pages → Branch: main / Folder: / (root)"
-  Write-Host "公開 URL: $pagesUrl"
+
+  Write-Host "Site URL: $pagesUrl"
+}
+else {
+  Write-Host "GitHub CLI (gh) is not installed. Enable Pages manually:"
+  Write-Host "Settings -> Pages -> Branch: main / Folder: / (root)"
+  Write-Host "Site URL: $pagesUrl"
 }
 
-Write-Host "完了しました。"
+Write-Host "Done."
