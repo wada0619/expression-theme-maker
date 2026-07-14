@@ -7,6 +7,42 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="sideMenu">
+    <span class="menu-toggle__icon" aria-hidden="true"></span>
+    <span class="visually-hidden">メニューを開く</span>
+  </button>
+
+  <div class="side-menu-backdrop" id="sideMenuBackdrop" hidden></div>
+
+  <aside class="side-menu" id="sideMenu" aria-hidden="true" aria-label="お題の選択メニュー">
+    <div class="side-menu__header">
+      <h2 class="side-menu__title">お題を選ぶ</h2>
+      <button type="button" class="side-menu__close" id="sideMenuClose" aria-label="メニューを閉じる">×</button>
+    </div>
+
+    <div class="side-menu__body">
+      <div class="picker-section" role="group" aria-label="カテゴリ選択">
+        <label class="picker-category" for="category-expression">
+          <input type="checkbox" class="picker-check" id="category-expression" data-category-toggle="expression" checked>
+          <span class="picker-check-box" aria-hidden="true"></span>
+          <span class="picker-category__label">表情</span>
+        </label>
+
+        <label class="picker-category" for="category-emotion">
+          <input type="checkbox" class="picker-check" id="category-emotion" data-category-toggle="emotion">
+          <span class="picker-check-box" aria-hidden="true"></span>
+          <span class="picker-category__label">感情</span>
+        </label>
+
+        <label class="picker-category" for="category-situation">
+          <input type="checkbox" class="picker-check" id="category-situation" data-category-toggle="situation">
+          <span class="picker-check-box" aria-hidden="true"></span>
+          <span class="picker-category__label">状況</span>
+        </label>
+      </div>
+    </div>
+  </aside>
+
   <div class="app">
     <main class="main">
       <h1 class="title">表情お題メーカー</h1>
@@ -23,10 +59,13 @@
         <button type="button" class="btn btn-secondary" id="copyBtn" disabled>
           コピー
         </button>
+        <button type="button" class="btn btn-secondary" id="shareBtn">
+          リンクをコピー
+        </button>
       </div>
     </main>
 
-    <section class="history-section" id="historySection">
+    <section class="history-section">
       <h2 class="history-title">履歴</h2>
       <div class="history-panel">
         <ul class="history-list" id="historyList"></ul>
@@ -44,6 +83,6 @@
     </footer>
   </div>
 
-  <script src="js/app.js?v=4"></script>
+  <script src="js/app.js?v=16"></script>
 </body>
 </html>
