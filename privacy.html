@@ -8,6 +8,25 @@
   <script src="js/analytics.js"></script>
 </head>
 <body>
+  <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="sideMenu">
+    <span class="menu-toggle__icon" aria-hidden="true"></span>
+    <span class="visually-hidden">メニューを開く</span>
+  </button>
+
+  <div class="side-menu-backdrop" id="sideMenuBackdrop" hidden></div>
+
+  <aside class="side-menu" id="sideMenu" aria-hidden="true" aria-label="メニュー">
+    <div class="side-menu__header">
+      <h2 class="side-menu__title">メニュー</h2>
+      <button type="button" class="side-menu__close" id="sideMenuClose" aria-label="メニューを閉じる">×</button>
+    </div>
+    <nav class="side-menu__nav" aria-label="サイドメニュー">
+      <a href="index.html" class="side-menu__link">トップ</a>
+      <a href="today.html" class="side-menu__link">今日のお題</a>
+      <a href="howto.html" class="side-menu__link">使い方</a>
+    </nav>
+  </aside>
+
   <div class="app">
     <main class="page">
       <a href="index.html" class="back-link">← トップへ戻る</a>
@@ -22,11 +41,11 @@
           当サイトは、お題の生成機能を提供するにあたり、氏名・メールアドレスなどの個人情報の入力を求めません。
         </p>
         <p>
-          次の情報は、お使いのブラウザ内(localStorage 等)にのみ保存され、当サイトのサーバーには送信されません。
+          次の情報は、お使いのブラウザ内にのみ保持され、当サイトのサーバーには送信されません。
         </p>
         <ul>
-          <li>生成されたお題の履歴（同一セッション内での表示用）</li>
-          <li>画面で選択したカテゴリ（表情・感情・状況）の設定</li>
+          <li>画面で選択したカテゴリ（表情・感情・状況）の設定（localStorage）</li>
+          <li>生成されたお題の履歴（同一タブ内の表示用。ページを閉じると消えます）</li>
         </ul>
 
         <h2>アクセス解析</h2>
@@ -82,7 +101,7 @@
 
         <p class="page-meta">
           制定日：2026年6月28日<br>
-          最終更新日：2026年7月16日
+          最終更新日：2026年7月18日
         </p>
       </div>
     </main>
@@ -97,5 +116,7 @@
       <p class="site-footer__tagline">創作のヒントを見つける、お題づくりのプラットフォーム</p>
     </footer>
   </div>
+
+  <script src="js/menu.js"></script>
 </body>
 </html>

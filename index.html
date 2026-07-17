@@ -8,6 +8,25 @@
   <script src="js/analytics.js"></script>
 </head>
 <body>
+  <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="sideMenu">
+    <span class="menu-toggle__icon" aria-hidden="true"></span>
+    <span class="visually-hidden">メニューを開く</span>
+  </button>
+
+  <div class="side-menu-backdrop" id="sideMenuBackdrop" hidden></div>
+
+  <aside class="side-menu" id="sideMenu" aria-hidden="true" aria-label="メニュー">
+    <div class="side-menu__header">
+      <h2 class="side-menu__title">メニュー</h2>
+      <button type="button" class="side-menu__close" id="sideMenuClose" aria-label="メニューを閉じる">×</button>
+    </div>
+    <nav class="side-menu__nav" aria-label="サイドメニュー">
+      <a href="index.html" class="side-menu__link" aria-current="page">トップ</a>
+      <a href="today.html" class="side-menu__link">今日のお題</a>
+      <a href="howto.html" class="side-menu__link">使い方</a>
+    </nav>
+  </aside>
+
   <div class="app-shell">
     <header class="top-bar">
       <div class="brand">
@@ -47,7 +66,7 @@
       <div class="action-bar">
         <button type="button" class="btn btn-generate" id="generateBtn">生成する</button>
         <div class="btn-row">
-          <button type="button" class="btn btn-quiet" id="copyBtn" disabled>コピー</button>
+          <button type="button" class="btn btn-quiet" id="copyBtn" disabled>お題をコピー</button>
           <button type="button" class="btn btn-quiet" id="shareBtn">リンクをコピー</button>
         </div>
       </div>
@@ -74,6 +93,7 @@
     </footer>
   </div>
 
-  <script src="js/app.js?v=17"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/app.js?v=18"></script>
 </body>
 </html>

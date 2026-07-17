@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>お問い合わせ | 表情お題メーカー</title>
+  <title>今日のお題 | 表情お題メーカー</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/analytics.js"></script>
 </head>
@@ -22,7 +22,7 @@
     </div>
     <nav class="side-menu__nav" aria-label="サイドメニュー">
       <a href="index.html" class="side-menu__link">トップ</a>
-      <a href="today.html" class="side-menu__link">今日のお題</a>
+      <a href="today.html" class="side-menu__link" aria-current="page">今日のお題</a>
       <a href="howto.html" class="side-menu__link">使い方</a>
     </nav>
   </aside>
@@ -30,29 +30,24 @@
   <div class="app">
     <main class="page">
       <a href="index.html" class="back-link">← トップへ戻る</a>
-      <h1 class="page-title">お問い合わせ</h1>
-      <div class="page-content">
-        <p>
-          表情お題メーカーに関するご意見・ご要望・不具合の報告などは、以下よりお問い合わせください。
-        </p>
+      <h1 class="page-title page-title--center">今日のお題</h1>
+      <p class="daily-date" id="dailyDate">読み込み中…</p>
 
-        <h2>メール</h2>
-        <p>
-          <a href="mailto:omochi.office06@gmail.com">omochi.office06@gmail.com</a>
-        </p>
+      <section class="prompt-stage" aria-live="polite">
+        <p class="prompt-stage__label">みんなで同じお題</p>
+        <p class="prompt-stage__text is-placeholder" id="dailyPrompt">お題を用意しています…</p>
+        <div class="prompt-stage__meta" id="dailyMeta" hidden></div>
+      </section>
 
-        <h2>お問い合わせの際にお願いしたいこと</h2>
-        <ul>
-          <li>お使いの端末・ブラウザ名</li>
-          <li>問題が起きた手順</li>
-          <li>表示されたメッセージやスクリーンショット(あれば)</li>
-        </ul>
-
-        <p>
-          当サイトは創作のヒントを届ける場所です。作品の良し悪しの評価ではなく、
-          使いやすさやお題の改善に関するフィードバックを歓迎します。
-        </p>
+      <div class="action-bar">
+        <button type="button" class="btn btn-generate" id="dailyCopyBtn" disabled>お題をコピー</button>
+        <a href="index.html" class="btn btn-quiet btn-link">自分でお題を作る</a>
       </div>
+
+      <p class="daily-note">
+        みんなで同じお題に挑戦できます。
+        日付が変わると（日本時間の0時）新しいお題になります。
+      </p>
     </main>
 
     <footer class="site-footer">
@@ -60,12 +55,13 @@
         <a href="about.html">このサイトについて</a>
         <a href="privacy.html">プライバシーポリシー</a>
         <a href="terms.html">利用規約</a>
-        <a href="contact.html" aria-current="page">お問い合わせ</a>
+        <a href="contact.html">お問い合わせ</a>
       </nav>
       <p class="site-footer__tagline">創作のヒントを見つける、お題づくりのプラットフォーム</p>
     </footer>
   </div>
 
   <script src="js/menu.js"></script>
+  <script src="js/daily.js"></script>
 </body>
 </html>

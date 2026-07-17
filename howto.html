@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>お問い合わせ | 表情お題メーカー</title>
+  <title>使い方 | 表情お題メーカー</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/analytics.js"></script>
 </head>
@@ -23,34 +23,47 @@
     <nav class="side-menu__nav" aria-label="サイドメニュー">
       <a href="index.html" class="side-menu__link">トップ</a>
       <a href="today.html" class="side-menu__link">今日のお題</a>
-      <a href="howto.html" class="side-menu__link">使い方</a>
+      <a href="howto.html" class="side-menu__link" aria-current="page">使い方</a>
     </nav>
   </aside>
 
   <div class="app">
     <main class="page">
       <a href="index.html" class="back-link">← トップへ戻る</a>
-      <h1 class="page-title">お問い合わせ</h1>
+      <h1 class="page-title page-title--center">使い方</h1>
       <div class="page-content">
-        <p>
-          表情お題メーカーに関するご意見・ご要望・不具合の報告などは、以下よりお問い合わせください。
+        <p class="page-lead">
+          表情・感情・状況を組み合わせて、創作のきっかけになるお題を作れます。
         </p>
 
-        <h2>メール</h2>
+        <h2>1. 含めたい要素を選ぶ</h2>
         <p>
-          <a href="mailto:omochi.office06@gmail.com">omochi.office06@gmail.com</a>
+          トップ画面の項目で「表情」「感情」「状況」のオン／オフを切り替えます。
+          チェックした要素だけが、お題に含まれます。
         </p>
 
-        <h2>お問い合わせの際にお願いしたいこと</h2>
-        <ul>
-          <li>お使いの端末・ブラウザ名</li>
-          <li>問題が起きた手順</li>
-          <li>表示されたメッセージやスクリーンショット(あれば)</li>
-        </ul>
-
+        <h2>2. 生成する</h2>
         <p>
-          当サイトは創作のヒントを届ける場所です。作品の良し悪しの評価ではなく、
-          使いやすさやお題の改善に関するフィードバックを歓迎します。
+          「生成する」を押すと、選んだ要素からランダムなお題が表示されます。
+          同じお題が続きにくいように、直近の結果は避けて選びます。
+        </p>
+
+        <h2>3. コピー・共有する</h2>
+        <p>
+          「お題をコピー」でテキストをコピーできます。
+          「リンクをコピー」で、同じお題を開ける共有リンクを作れます。
+        </p>
+
+        <h2>4. 履歴を見る</h2>
+        <p>
+          生成したお題は、画面下の履歴に最大 10 件残ります。
+          履歴はこのタブ内のみで、ページを閉じると消えます。
+        </p>
+
+        <h2>5. 今日のお題</h2>
+        <p>
+          左上メニューの「今日のお題」では、みんなで同じお題に挑戦できます。
+          日付が変わると（日本時間の0時）新しいお題になります。
         </p>
       </div>
     </main>
@@ -60,7 +73,7 @@
         <a href="about.html">このサイトについて</a>
         <a href="privacy.html">プライバシーポリシー</a>
         <a href="terms.html">利用規約</a>
-        <a href="contact.html" aria-current="page">お問い合わせ</a>
+        <a href="contact.html">お問い合わせ</a>
       </nav>
       <p class="site-footer__tagline">創作のヒントを見つける、お題づくりのプラットフォーム</p>
     </footer>

@@ -314,7 +314,7 @@ async function copyText(text, button, successLabel, idleLabel) {
 
 async function copyPrompt() {
   if (!currentPrompt) return;
-  await copyText(currentPrompt, copyBtn, "コピーしました", "コピー");
+  await copyText(currentPrompt, copyBtn, "コピーしました", "お題をコピー");
 }
 
 async function copyShareLink() {
@@ -359,7 +359,7 @@ function handleGenerate() {
   const prompt = generatePrompt();
 
   if (!prompt) {
-    clearPromptDisplay("上のチップで、表情・感情・状況にチェックを入れてください。");
+    clearPromptDisplay("上の項目で、表情・感情・状況にチェックを入れてください。");
     return;
   }
 

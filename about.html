@@ -8,6 +8,25 @@
   <script src="js/analytics.js"></script>
 </head>
 <body>
+  <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="sideMenu">
+    <span class="menu-toggle__icon" aria-hidden="true"></span>
+    <span class="visually-hidden">メニューを開く</span>
+  </button>
+
+  <div class="side-menu-backdrop" id="sideMenuBackdrop" hidden></div>
+
+  <aside class="side-menu" id="sideMenu" aria-hidden="true" aria-label="メニュー">
+    <div class="side-menu__header">
+      <h2 class="side-menu__title">メニュー</h2>
+      <button type="button" class="side-menu__close" id="sideMenuClose" aria-label="メニューを閉じる">×</button>
+    </div>
+    <nav class="side-menu__nav" aria-label="サイドメニュー">
+      <a href="index.html" class="side-menu__link">トップ</a>
+      <a href="today.html" class="side-menu__link">今日のお題</a>
+      <a href="howto.html" class="side-menu__link">使い方</a>
+    </nav>
+  </aside>
+
   <div class="app">
     <main class="page">
       <a href="index.html" class="back-link">← トップへ戻る</a>
@@ -25,9 +44,11 @@
           <li>表情・感情・状況を組み合わせたランダムお題の生成</li>
           <li>お題のコピーと共有リンクの作成</li>
           <li>直近のお題の履歴表示</li>
+          <li>その日みんなで同じ「今日のお題」</li>
         </ul>
         <p>
           イラスト、漫画、練習スケッチなど、自由な形で創作に活用してください。
+          詳しい操作は<a href="howto.html">使い方</a>をご覧ください。
         </p>
       </div>
     </main>
@@ -42,5 +63,7 @@
       <p class="site-footer__tagline">創作のヒントを見つける、お題づくりのプラットフォーム</p>
     </footer>
   </div>
+
+  <script src="js/menu.js"></script>
 </body>
 </html>
