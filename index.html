@@ -8,69 +8,59 @@
   <script src="js/analytics.js"></script>
 </head>
 <body>
-  <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="sideMenu">
-    <span class="menu-toggle__icon" aria-hidden="true"></span>
-    <span class="visually-hidden">メニューを開く</span>
-  </button>
+  <div class="app-shell">
+    <header class="top-bar">
+      <div class="brand">
+        <h1 class="brand__name">表情お題メーカー</h1>
+        <p class="brand__sub">創作のヒントを見つける、お題づくり</p>
+      </div>
+    </header>
 
-  <div class="side-menu-backdrop" id="sideMenuBackdrop" hidden></div>
-
-  <aside class="side-menu" id="sideMenu" aria-hidden="true" aria-label="お題の選択メニュー">
-    <div class="side-menu__header">
-      <h2 class="side-menu__title">お題を選ぶ</h2>
-      <button type="button" class="side-menu__close" id="sideMenuClose" aria-label="メニューを閉じる">×</button>
-    </div>
-
-    <div class="side-menu__body">
-      <div class="picker-section" role="group" aria-label="カテゴリ選択">
-        <label class="picker-category" for="category-expression">
-          <input type="checkbox" class="picker-check" id="category-expression" data-category-toggle="expression" checked>
-          <span class="picker-check-box" aria-hidden="true"></span>
-          <span class="picker-category__label">表情</span>
+    <section class="category-bar" aria-label="カテゴリ選択">
+      <p class="category-bar__label">お題に含める要素</p>
+      <div class="category-chips" id="categoryChips" role="group">
+        <label class="chip" for="category-expression">
+          <input type="checkbox" id="category-expression" data-category-toggle="expression" checked>
+          <span class="chip__dot" aria-hidden="true"></span>
+          <span class="chip__text">表情</span>
         </label>
-
-        <label class="picker-category" for="category-emotion">
-          <input type="checkbox" class="picker-check" id="category-emotion" data-category-toggle="emotion">
-          <span class="picker-check-box" aria-hidden="true"></span>
-          <span class="picker-category__label">感情</span>
+        <label class="chip" for="category-emotion">
+          <input type="checkbox" id="category-emotion" data-category-toggle="emotion">
+          <span class="chip__dot" aria-hidden="true"></span>
+          <span class="chip__text">感情</span>
         </label>
-
-        <label class="picker-category" for="category-situation">
-          <input type="checkbox" class="picker-check" id="category-situation" data-category-toggle="situation">
-          <span class="picker-check-box" aria-hidden="true"></span>
-          <span class="picker-category__label">状況</span>
+        <label class="chip" for="category-situation">
+          <input type="checkbox" id="category-situation" data-category-toggle="situation">
+          <span class="chip__dot" aria-hidden="true"></span>
+          <span class="chip__text">状況</span>
         </label>
       </div>
-    </div>
-  </aside>
+    </section>
 
-  <div class="app">
-    <main class="main">
-      <h1 class="title">表情お題メーカー</h1>
-
-      <section class="prompt-section" aria-live="polite">
-        <p class="prompt-label">お題</p>
-        <p class="prompt-text is-placeholder" id="promptText">ボタンを押してお題を生成</p>
+    <main>
+      <section class="prompt-stage" aria-live="polite">
+        <p class="prompt-stage__label">お題</p>
+        <p class="prompt-stage__text is-placeholder" id="promptText">生成を押すと、ここにランダムなお題が出ます</p>
+        <div class="prompt-stage__meta" id="promptMeta" hidden></div>
       </section>
 
-      <div class="actions">
-        <button type="button" class="btn btn-primary" id="generateBtn">
-          生成
-        </button>
-        <button type="button" class="btn btn-secondary" id="copyBtn" disabled>
-          コピー
-        </button>
-        <button type="button" class="btn btn-secondary" id="shareBtn">
-          リンクをコピー
-        </button>
+      <div class="action-bar">
+        <button type="button" class="btn btn-generate" id="generateBtn">生成する</button>
+        <div class="btn-row">
+          <button type="button" class="btn btn-quiet" id="copyBtn" disabled>コピー</button>
+          <button type="button" class="btn btn-quiet" id="shareBtn">リンクをコピー</button>
+        </div>
       </div>
     </main>
 
-    <section class="history-section">
-      <h2 class="history-title">履歴</h2>
-      <div class="history-panel">
-        <ul class="history-list" id="historyList"></ul>
+    <section class="history" aria-label="履歴">
+      <div class="history__header">
+        <h2 class="history__title">履歴</h2>
+        <p class="history__hint">直近 10 件・このタブ内のみ</p>
       </div>
+      <ul class="history__list" id="historyList">
+        <li class="history__empty">まだ履歴はありません</li>
+      </ul>
     </section>
 
     <footer class="site-footer">
@@ -84,6 +74,6 @@
     </footer>
   </div>
 
-  <script src="js/app.js?v=16"></script>
+  <script src="js/app.js?v=17"></script>
 </body>
 </html>

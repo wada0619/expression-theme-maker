@@ -27,36 +27,30 @@ const lastSelections = {
 let currentPrompt = "";
 
 let promptTextEl;
+let promptMetaEl;
 let generateBtn;
 let copyBtn;
 let shareBtn;
 let historyList;
-let menuToggle;
-let sideMenu;
-let sideMenuBackdrop;
-let sideMenuClose;
+let categoryChips;
 
 function bindDomElements() {
   promptTextEl = document.getElementById("promptText");
+  promptMetaEl = document.getElementById("promptMeta");
   generateBtn = document.getElementById("generateBtn");
   copyBtn = document.getElementById("copyBtn");
   shareBtn = document.getElementById("shareBtn");
   historyList = document.getElementById("historyList");
-  menuToggle = document.getElementById("menuToggle");
-  sideMenu = document.getElementById("sideMenu");
-  sideMenuBackdrop = document.getElementById("sideMenuBackdrop");
-  sideMenuClose = document.getElementById("sideMenuClose");
+  categoryChips = document.getElementById("categoryChips");
 
   return (
     promptTextEl &&
+    promptMetaEl &&
     generateBtn &&
     copyBtn &&
     shareBtn &&
     historyList &&
-    menuToggle &&
-    sideMenu &&
-    sideMenuBackdrop &&
-    sideMenuClose
+    categoryChips
   );
 }
 
@@ -242,6 +236,22 @@ function generatePrompt() {
   return prompt;
 }
 
+function updatePromptMeta(selections) {
+  const pills = Object.values(CATEGORIES)
+    .filter((category) => selections[category.id])
+    .map((category) => `<span class="meta-pill">${category.label}</span>`)
+    .join("");
+
+  if (!pills) {
+    promptMetaEl.hidden = true;
+    promptMetaEl.innerHTML = "";
+    return;
+  }
+
+  promptMetaEl.hidden = false;
+  promptMetaEl.innerHTML = pills;
+}
+
 function displayPrompt(prompt) {
   currentPrompt = prompt;
   promptTextEl.classList.remove("is-new", "is-placeholder");
@@ -249,6 +259,18 @@ function displayPrompt(prompt) {
   promptTextEl.textContent = prompt;
   promptTextEl.classList.add("is-new");
   copyBtn.disabled = !prompt;
+  updatePromptMeta(lastSelections);
+}
+
+function clearPromptDisplay(message) {
+  currentPrompt = "";
+  rememberSelections({});
+  promptTextEl.classList.remove("is-new");
+  promptTextEl.classList.add("is-placeholder");
+  promptTextEl.textContent = message;
+  promptMetaEl.hidden = true;
+  promptMetaEl.innerHTML = "";
+  copyBtn.disabled = true;
 }
 
 function addToHistory(prompt) {
@@ -259,8 +281,13 @@ function addToHistory(prompt) {
 }
 
 function renderHistory() {
+  if (promptHistory.length === 0) {
+    historyList.innerHTML = `<li class="history__empty">まだ履歴はありません</li>`;
+    return;
+  }
+
   historyList.innerHTML = promptHistory
-    .map((item) => `<li class="history-item">${escapeHtml(item)}</li>`)
+    .map((item) => `<li class="history__item">${escapeHtml(item)}</li>`)
     .join("");
 }
 
@@ -310,30 +337,6 @@ function applySharedSelections(selections) {
   addToHistory(prompt);
 }
 
-function openSideMenu() {
-  sideMenu.classList.add("is-open");
-  sideMenu.setAttribute("aria-hidden", "false");
-  sideMenuBackdrop.hidden = false;
-  menuToggle.setAttribute("aria-expanded", "true");
-  document.body.classList.add("menu-open");
-}
-
-function closeSideMenu() {
-  sideMenu.classList.remove("is-open");
-  sideMenu.setAttribute("aria-hidden", "true");
-  sideMenuBackdrop.hidden = true;
-  menuToggle.setAttribute("aria-expanded", "false");
-  document.body.classList.remove("menu-open");
-}
-
-function toggleSideMenu() {
-  if (sideMenu.classList.contains("is-open")) {
-    closeSideMenu();
-  } else {
-    openSideMenu();
-  }
-}
-
 function syncCategoryCheckboxes() {
   for (const id of Object.keys(CATEGORIES)) {
     const checkbox = document.querySelector(`[data-category-toggle="${id}"]`);
@@ -356,13 +359,7 @@ function handleGenerate() {
   const prompt = generatePrompt();
 
   if (!prompt) {
-    promptTextEl.classList.remove("is-new");
-    promptTextEl.classList.add("is-placeholder");
-    promptTextEl.textContent =
-      "左上メニューで表情・感情・状況にチェックを入れてください。";
-    copyBtn.disabled = true;
-    currentPrompt = "";
-    rememberSelections({});
+    clearPromptDisplay("上のチップで、表情・感情・状況にチェックを入れてください。");
     return;
   }
 
@@ -379,13 +376,7 @@ async function init() {
   generateBtn.addEventListener("click", handleGenerate);
   copyBtn.addEventListener("click", copyPrompt);
   shareBtn.addEventListener("click", copyShareLink);
-  menuToggle.addEventListener("click", toggleSideMenu);
-  sideMenuClose.addEventListener("click", closeSideMenu);
-  sideMenuBackdrop.addEventListener("click", closeSideMenu);
-  sideMenu.addEventListener("change", handlePickerChange);
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeSideMenu();
-  });
+  categoryChips.addEventListener("change", handlePickerChange);
 
   const reloaded = isPageReload();
   if (reloaded) clearShareUrlFromAddressBar();
@@ -394,14 +385,16 @@ async function init() {
   if (!sharedSelections) loadEnabledCategories();
 
   syncCategoryCheckboxes();
+  renderHistory();
 
   try {
     await loadAllCategories();
     if (sharedSelections) applySharedSelections(sharedSelections);
   } catch (error) {
     console.error(error);
-    promptTextEl.textContent =
-      "データの読み込みに失敗しました。ローカルサーバーで起動してください。";
+    clearPromptDisplay(
+      "データの読み込みに失敗しました。ローカルサーバーで起動してください。"
+    );
     generateBtn.disabled = true;
   }
 }
